@@ -1,6 +1,6 @@
 # Spring: SurLaRoute
 
-  #Critères de validation
+  # Critères de validation
   
     - Le contrôleur contient 1 seule route /doctor/<numéro de l'incarnation>.
     - La route renvoie un JSON pour les 5 dernières incarnations, un statut 303 pour les plus anciennes, sinon elle renvoie un statut 404 avec un message adapté.
