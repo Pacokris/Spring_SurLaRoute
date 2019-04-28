@@ -2,34 +2,44 @@ package com.wildcodeschool.surLaRoute.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 
 @Controller
 public class DoctorController {
 
-
-
     @RequestMapping("/doctor/{number}")
     @ResponseBody
-    public ExtendedDoctor myDoctor(@PathVariable Integer number) {
+    public ExtendedDoctor myDoctor(@PathVariable Integer number, @RequestParam (value = "details", required = false) boolean details ){
 
-        switch (number) {
+        if(details == true) {
+            switch (number) {
+                case 9:
+                    return new ExtendedDoctor(number, "Christopher Eccleston", "13", "41");
+                case 10:
+                    return new ExtendedDoctor(number, "David Tennant", "47", "34");
+                case 11:
+                    return new ExtendedDoctor(number, "Matt Smith", "44", "27");
+                case 12:
+                    return new ExtendedDoctor(number, "Peter Capaldi", "40", "55");
+                case 13:
+                    return new ExtendedDoctor(number, "Jodie Whittaker", "11", "35");
+            }
+        }
+
+        if(details == false) switch (number) {
             case 9:
-                return new ExtendedDoctor(number, "Christopher Eccleston", "13", "41");
+                return new ExtendedDoctor(number, "Christopher Eccleston", "", "");
             case 10:
-                return new ExtendedDoctor(number, "David Tennant", "47", "34");
+                return new ExtendedDoctor(number, "David Tennant", "", "");
             case 11:
-                return new ExtendedDoctor(number, "Matt Smith", "44", "27");
+                return new ExtendedDoctor(number, "Matt Smith", "", "");
             case 12:
-                return new ExtendedDoctor(number, "Peter Capaldi", "40", "55");
+                return new ExtendedDoctor(number, "Peter Capaldi", "", "");
             case 13:
-                return new ExtendedDoctor(number, "Jodie Whittaker", "11", "35");
+                return new ExtendedDoctor(number, "Jodie Whittaker", "", "");
+
         }
 
         if((number >= 1)&&(number <=8)) {
