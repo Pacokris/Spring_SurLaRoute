@@ -1,5 +1,7 @@
 package com.wildcodeschool.surLaRoute.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,34 +13,34 @@ public class DoctorController {
 
     @RequestMapping("/doctor/{number}")
     @ResponseBody
-    public ExtendedDoctor myDoctor(@PathVariable Integer number, @RequestParam (value = "details", required = false) boolean details ){
+    public Doctor myDoctor(@PathVariable Integer number, @RequestParam (value = "details", required = false) boolean details ){
 
         if(details == true) {
             switch (number) {
                 case 9:
-                    return new ExtendedDoctor(number, "Christopher Eccleston", "13", "41");
+                    return new Doctor(number, "Christopher Eccleston", "13", "41");
                 case 10:
-                    return new ExtendedDoctor(number, "David Tennant", "47", "34");
+                    return new Doctor(number, "David Tennant", "47", "34");
                 case 11:
-                    return new ExtendedDoctor(number, "Matt Smith", "44", "27");
+                    return new Doctor(number, "Matt Smith", "44", "27");
                 case 12:
-                    return new ExtendedDoctor(number, "Peter Capaldi", "40", "55");
+                    return new Doctor(number, "Peter Capaldi", "40", "55");
                 case 13:
-                    return new ExtendedDoctor(number, "Jodie Whittaker", "11", "35");
+                    return new Doctor(number, "Jodie Whittaker", "11", "35");
             }
         }
 
         if(details == false) switch (number) {
             case 9:
-                return new ExtendedDoctor(number, "Christopher Eccleston", "", "");
+                return new Doctor(number, "Christopher Eccleston");
             case 10:
-                return new ExtendedDoctor(number, "David Tennant", "", "");
+                return new Doctor(number, "David Tennant");
             case 11:
-                return new ExtendedDoctor(number, "Matt Smith", "", "");
+                return new Doctor(number, "Matt Smith");
             case 12:
-                return new ExtendedDoctor(number, "Peter Capaldi", "", "");
+                return new Doctor(number, "Peter Capaldi");
             case 13:
-                return new ExtendedDoctor(number, "Jodie Whittaker", "", "");
+                return new Doctor(number, "Jodie Whittaker");
 
         }
 
@@ -61,6 +63,11 @@ public class DoctorController {
             this.numberOfEpisodes = numberOfEpisodes;
             this.ageAtStart = ageAtStart;
         }
+        Doctor(int number, String name) {
+            this.number = number;
+            this.name = name;
+        }
+
 
         public int getNumber() {
             return number;
@@ -79,11 +86,5 @@ public class DoctorController {
         }
     }
 
-    class ExtendedDoctor extends Doctor {
-
-
-        ExtendedDoctor(int number, String name, String numberOfEpisodes, String ageAtStart) {
-            super(number, name, numberOfEpisodes, ageAtStart);
-        }
-    }
+  
 }
